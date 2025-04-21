@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      target: ${NODE_ENV:-development}
+      args:
+        NODE_ENV: ${NODE_ENV:-development}
+    image: myapp:dev
+    ports:
+      - '3000:3000' # HTTP
+      - '3001:3001' # WebSocket si séparé
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/mydb
+    depends_on:
+      - db
+    command: npx nodemon --watch src --ext ts,json --exec ts-node src/index.ts
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

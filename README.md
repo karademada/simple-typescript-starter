@@ -1,43 +1,122 @@
-# 🧰 Simple TypeScript Starter | 2024
+# Madaloc360 Backend
 
-> We talk about a lot of **advanced Node.js and TypeScript** concepts on [the blog](https://khalilstemmler.com), particularly focused around Domain-Driven Design and large-scale enterprise application patterns. However, I received a few emails from readers that were interested in seeing what a basic TypeScript starter project looks like. So I've put together just that.
+The backend service for Madaloc360 platform, handling reservations and messaging via WebSockets.
 
-### Features
+## Features
 
-- Minimal
-- TypeScript v4
-- Testing with Jest
-- Linting with Eslint and Prettier
-- Pre-commit hooks with Husky
-- VS Code debugger scripts
-- Local development with Nodemon
+- Domain-Driven Design architecture
+- TypeScript with strict type checking
+- WebSocket messaging system
+- Reservation management
+- Docker containerization
+- Jest testing
+- ESLint + Prettier code formatting
 
-### Scripts
+## Getting Started
 
-#### `npm run start:dev`
+### Prerequisites
 
-Starts the application in development using `nodemon` and `ts-node` to do hot reloading.
+- Node.js 18+
+- pnpm
+- Docker (optional)
 
-#### `npm run start`
+### Installation
 
-Starts the app in production by first building the project with `npm run build`, and then executing the compiled JavaScript at `build/index.js`.
+1. Clone the repository
+2. Install dependencies:
 
-#### `npm run build`
+```bash
+pnpm install
+```
 
-Builds the app at `build`, cleaning the folder first.
+### Development
 
-#### `npm run test`
+Start the development server:
 
-Runs the `jest` tests once.
+```bash
+pnpm run dev
+```
 
-#### `npm run test:dev`
+This will:
 
-Run the `jest` tests in watch mode, waiting for file changes.
+- Start the server with hot reload
+- Watch for file changes
+- Run tests on changes
 
-#### `npm run prettier-format`
+### Production
 
-Format your code.
+Build the production bundle:
 
-#### `npm run prettier-watch`
+```bash
+pnpm run build
+```
 
-Format your code in watch mode, waiting for file changes.
+Start the production server:
+
+```bash
+pnpm start
+```
+
+### Testing
+
+Run tests once:
+
+```bash
+pnpm test
+```
+
+Run tests in watch mode:
+
+```bash
+pnpm test:dev
+```
+
+## Docker
+
+Build the Docker image:
+
+```bash
+docker-compose build
+```
+
+Start the services:
+
+```bash
+docker-compose up
+```
+
+## script bash avec docker-compose
+
+```bash
+chmod +x dev.sh
+
+# Pour lancer en développement (par défaut)
+./dev.sh
+
+# Pour lancer en production
+./dev.sh production
+```
+
+## Project Structure
+
+```
+src/
+├── application/          # Application layer
+│   └── use-cases/        # Business use cases
+├── domain/               # Domain layer
+│   ├── message/          # Message domain
+│   └── reservation/      # Reservation domain
+├── interfaces/           # Interface adapters
+│   └── websockets/       # WebSocket gateway
+└── index.ts              # Entry point
+```
+
+## Available Scripts
+
+- `dev`: Start development server
+- `build`: Build production bundle
+- `start`: Start production server
+- `test`: Run tests
+- `test:dev`: Run tests in watch mode
+- `lint`: Run linter
+- `format`: Format code
